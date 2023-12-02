@@ -1,25 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes, useActionData } from "react-router-dom";
+import ProtectedRoutes from './ProtectedRoutes';
+import TrucksPage from './pages/TrucksPage';
+import Sample from './pages/Sample';
+import Order from './pages/Order';
+import OrdersPage from './pages/OrdersPage';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="App">
+        <Routes>
+          <Route element={<ProtectedRoutes />}>
+            <Route path='/' element={<OrdersPage />} />
+            <Route path='/orders' element={<OrdersPage />} />
+            <Route path='/order' element={<Order />} />
+            {/* <Route path='/trucks' element={<TrucksPage />} /> */}
+            {/* <Route path='/sample' element={<Sample />} /> */}
+          </Route>
+        </Routes>
+      </div>
     </div>
   );
 }
 
 export default App;
+
+
