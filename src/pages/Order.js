@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import SignatureCanvas from 'react-signature-canvas';
 
 
+
 function Order() {
     const [order, setOrder] = useState([])    
     const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
@@ -29,15 +30,15 @@ function Order() {
         fetchData()
       };
 
-  const showConfirmation = () => {
-    const result = window.confirm('Mark as Completed?');
-    if (result) {
-      updateOrderDone()
-    } 
-  };
+    const showConfirmation = () => {
+      const result = window.confirm('Mark as Completed?');
+      if (result) {
+        updateOrderDone()
+      } 
+    };
 
       const [signTenant1, setSignTenant1] = useState(null)
-      const [currentTenantSign1, setCurrentSignTenand1] = useState()
+      const [currentTenantSign1, setCurrentSignTenant] = useState()
 
 
       //  ==== SIGNATURES ====  // 
@@ -51,31 +52,32 @@ function Order() {
             break;
         }
       }
-      function storeSign(signID){
-          let signatureData;
-          switch (signID) {
-            case 1:
-              signatureData = signTenant1.toDataURL();
-              setCurrentSignTenand1(signatureData)
-              break;
-            default:
-              console.log("SIGNER NOT FOUND");
-              break;
-          }
+      async function storeSign(){
+        await fetch(`${apiURL}/updateOrderSignature.php?id=` + getID() + '&&signature=' + signTenant1.getTrimmedCanvas().toDataURL('image/png').toString())
+        console.log("Sign Submitted");
+        fetchData()
       }
 
-      
+
+
 
 
   return (
-
     <div className='wrapper'>
         <Navbar />
         <div className='content'>
         {order.map((elements) => (   
                 <div key={elements}> 
-                <HeadNav title={elements.company}/>
-                <h3> {elements.jobsite} </h3>
+                    <HeadNav title={elements.company}/>
+                    <h3> {elements.jobsite} </h3>
+                    <div className='badges'>
+                      <div className='badge-completed' style={{display: elements.done == 1? "block":"none"}}>
+                        <i className="bi bi-check-circle-fill"></i> Completed
+                      </div>
+                      <div className='badge-completed' style={{display: elements.signature !== ''? "block":"none"}}>
+                        <i className="bi bi-pen-fill"></i> Signed
+                      </div>
+                    </div>
                 
                     <div className='row'>
                       <h4> Company: </h4>
@@ -324,38 +326,27 @@ function Order() {
                       <h4> 4" 4x6 Wood Beams: </h4>
                       <p> {elements.wb4}</p>
                     </div>
-
-
-                    {elements.done == 0?
-                        <button onClick={()=>showConfirmation()} className='btnCompleted'> Mark as Completed </button> : 
-                        <div className='completed'>
-                            <p> Order Completed</p> 
-                            <i class="bi bi-check2-circle completedIcon"></i>
+                   <button onClick={()=>showConfirmation()} className='btnCompleted' style={{display: elements.done == 0 ? "block":"none"}}> Mark as Completed </button> 
+                    <div className='sign-pad' style={{display: elements.done == 1 && elements.signature == ''? "block":"none"}}>
+                        <div className='pad'>
+                        <SignatureCanvas 
+                            penColor="white" 
+                            canvasProps={{width: 340, height: 250, className: 'sigCanvas'}} 
+                            ref={c=>setSignTenant1(c)}
+                        ></SignatureCanvas>
                         </div>
-                    }
+                        <div className='actions'>
+                            <button id="save"   onClick={()=>storeSign(1)}> Save </button>
+                            <button id="cancel" onClick={()=>clearSign(1)}> Clear </button>
+                        </div>
+                    </div>
+
                 </div>
-                
-        ))}    
-
-        <div className='sign-pad'>
-            <div className='pad'>
-            <SignatureCanvas 
-                penColor="white" 
-                canvasProps={{width: 340, height: 250, className: 'sigCanvas'}} 
-                ref={c=>setSignTenant1(c)}
-            ></SignatureCanvas>
-            </div>
-            <div className='actions'>
-                <button id="save"   onClick={()=>storeSign(1)}> Save </button>
-                <button id="cancel" onClick={()=>clearSign(1)}> Clear </button>
-            </div>
-        </div>
-
-
-        
+               
+               
+        ))}     
         </div>
     </div>
-
   )
 }
 

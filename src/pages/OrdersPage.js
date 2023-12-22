@@ -11,6 +11,7 @@ function OrdersPage() {
     const [isMobile, setIsMobile] = useState(false)
     const [group, setGroup] = useState(1)
     const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
+
     useEffect(() => {
         const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
         if (themeColorMetaTag) {
@@ -35,6 +36,12 @@ function OrdersPage() {
           setIsMobile(true)
         } else {
           setIsMobile(false)
+        }
+        const storedGroup = localStorage.getItem('ordersGroup');
+        if (storedGroup) {
+          setGroup(storedGroup);
+        } else {
+          setGroup(1)
         }
     }, []);
     function getOrders(){
@@ -77,15 +84,21 @@ function OrdersPage() {
         }
     }
 
+    
+    function changeGroup(page){
+      localStorage.setItem('ordersGroup', page)
+      setGroup(page)
+    }
+
   return (
     <div className='wrapper'>
         <HeadNav title="Orders"/>
         <Navbar />
         <div className='content'>
             <div className='selector3'>
-                <p className={group==1? "selected":""} onClick={()=>setGroup(1)}> For Today </p>
-                <p className={group==2? "selected":""} onClick={()=>setGroup(2)} id='w-border'> Upcoming </p>
-                <p className={group==3? "selected":""} onClick={()=>setGroup(3)}> Past </p>
+                <p className={group==1? "selected":""} id="left" onClick={()=>changeGroup(1)}> For Today </p>
+                <p className={group==2? "selected":""} id="center" onClick={()=>changeGroup(2)}> Upcoming </p>
+                <p className={group==3? "selected":""} id="right" onClick={()=>changeGroup(3)}> Past </p>
             </div>
             <div className='orders'>
 

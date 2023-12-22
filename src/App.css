@@ -1688,18 +1688,28 @@ overflow-y: scroll;
   border-radius:5px;
   color: lightgray;
 }
+.selector3 #left {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.selector3  #center{
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
+.selector3 #right {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
 .selector3 p{
   font-size: 15px;
   padding: 6px 0;
 }
-.selector3  #w-border{
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-}
+
 .selector3 .selected {
   background-color: #282c34;
   color: #65D1B5;
 }
+
 
 
 
@@ -1840,6 +1850,18 @@ h5 {
   font-size: 40px;
 }
 
+.badges {
+  display: flex;
+  gap: 5px;
+}
+.badge-completed {
+  background-color: #65D1B5;
+  width: fit-content;
+  padding: 5px 14px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
 
 /* ========= TRUCKS PAGE ======= */
 .trucks {
@@ -1905,6 +1927,7 @@ h5 {
   height: 100%;
   border-radius: 10px;
   margin-top: 20px;
+  margin-bottom: 150px;
   /* background-color: white; */
   border: 1px solid gray;
 }
@@ -1931,4 +1954,8 @@ h5 {
 .sign-pad #cancel {
   background-color: lightgray;
   color: #0e1013;
+}
+
+#singBack {
+  background-color: white;
 }
