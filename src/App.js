@@ -7,6 +7,7 @@ import Truck from './pages/Truck';
 import Sample from './pages/Sample';
 import Order from './pages/Order';
 import OrdersPage from './pages/OrdersPage';
+import NewTruck from './pages/NewTruck';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path='/order' element={<Order />} />
             <Route path='/trucks' element={<TrucksPage />} />
             <Route path='/truck' element={<Truck />} />
+            <Route path='/newTruck' element={<NewTruck />} />
             {/* <Route path='/sample' element={<Sample />} /> */}
           </Route>
         </Routes>

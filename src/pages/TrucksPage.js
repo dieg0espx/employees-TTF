@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar'
 
 function TrucksPage() {
   const [trucks, setTrucks] = useState([])
-
   const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
 
   useEffect(()=>{
@@ -58,7 +57,7 @@ function TrucksPage() {
 
   return (
     <div className='wrapper'>
-        <HeadNav title="Trucks" />
+        <HeadNav title="Trucks" action="plus" newLocation="/#/newTruck"/>
         <Navbar />
         <div className='content'>
             {trucks.map((truck) => (

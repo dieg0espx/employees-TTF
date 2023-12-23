@@ -72,38 +72,43 @@ function Truck() {
         }
       }
 
-    //   function checkTimes() {
-    //     const startTime = performance.now(); // Record start time
-    //     fetch('http://api.ttfconstruction.com/getImage6.php?id=' + id)
-    //         .then(() => {
-    //             const endTime = performance.now(); // Record end time
-    //             const loadingTime = endTime - startTime;
-    //             console.log(`URL loaded in ${loadingTime} milliseconds`);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching URL:', error);
-    //         });
-    // }
-    
-      
-    //   checkTimes()
+      useEffect(() => {
+          if (iframe1) {
+            console.log(1);
+          }
+          if (iframe2) {
+            console.log(2);
+          }
+          if (iframe3) {
+            console.log(3);
+          }
+          if (iframe4) {
+            console.log(4);
+          }
+          if (iframe5) {
+            console.log(5);
+          }
+          if (iframe6) {
+            console.log(6);
+          }
+      }, [iframe5]);
 
 
-  
+
+
   return (
     <div className='wrapper'>
-        
         <Navbar />
         <div className='content'>
             <HeadNav title={upperCase(truck.company)} />
             <h3> {truck.location} </h3>
             <h3> {formatDate(truck.date)} | {formatTime(truck.time)}</h3>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage1.php?id=' + id} onLoad={()=>setIframe1(true)} style={{display: iframe1? "block":"none"}}/>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage2.php?id=' + id} onLoad={()=>setIframe2(true)} style={{display: iframe2? "block":"none"}}/>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage3.php?id=' + id} onLoad={()=>setIframe3(true)} style={{display: iframe3? "block":"none"}}/>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage4.php?id=' + id} onLoad={()=>setIframe4(true)} style={{display: iframe4? "block":"none"}}/>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage5.php?id=' + id} onLoad={()=>setIframe5(true)} style={{display: iframe5? "block":"none"}}/>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage6.php?id=' + id} onLoad={()=>setIframe6(true)} style={{display: iframe6? "block":"none"}}/> 
+            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage1.php?id=' + id} onLoad={()=>setIframe1(true)} />
+            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage2.php?id=' + id} onLoad={()=>setIframe2(true)} />
+            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage3.php?id=' + id} onLoad={()=>setIframe3(true)} />
+            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage4.php?id=' + id} onLoad={()=>setIframe4(true)} />
+            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage5.php?id=' + id} onLoad={()=>setIframe5(true)} />
+            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage6.php?id=' + id} onLoad={()=>setIframe6(true)} /> 
         </div> 
     </div>
   )
