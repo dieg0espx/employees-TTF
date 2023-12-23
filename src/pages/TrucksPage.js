@@ -4,17 +4,13 @@ import Navbar from '../components/Navbar'
 
 function TrucksPage() {
   const [trucks, setTrucks] = useState([])
-  const [showSidebar, setShowSidebar] = useState(false)
-  const [selectedTruck, setSelectedTruck] = useState([])
-  const [openIframe, setOpenIframe] = useState(0)
-  const [showPopup, setShowPopup] = useState(false)
-  const [selectedImage, setSelectedImage] = useState('')
-  const [isMobile, setIsMobile] = useState(false)
+
   const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
+
   useEffect(()=>{
-        getTrucks()
-        window.innerWidth < 600 ? setIsMobile(true):setIsMobile(false)
+    getTrucks()
   },[])
+
   function getTrucks() {
       fetch( apiURL + '/getTrucks.php')
       .then(response => response.json())
@@ -27,27 +23,11 @@ function TrucksPage() {
           console.error('Error:', error);
       });
   }
-  function formatDate(date){
-    let preFormat = new Date(date).toLocaleDateString('en-US', {
-       month: '2-digit',
-       day: '2-digit',
-       year: 'numeric',
-     });
-     const dateStr = preFormat
-     const dateObj = new Date(dateStr);
-     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-     const formattedDate = dateObj.toLocaleDateString('en-US', options);
 
-     return formattedDate
+  function showTruck(id){
+      window.location.href = "/#/truck?id=" + id
   }
-  function showTruck(id, company, location, date, time, status){
-      setSelectedTruck({id, company, location, date, time, status})
-      setShowSidebar(true)
-  }
-  function openImage(url){
-    setShowPopup(true)
-    setSelectedImage(url)
-  }
+
   function getMonthName(monthNumber) {
     const months = [
         "January", "February", "March", "April", "May", "June",
@@ -62,6 +42,20 @@ function TrucksPage() {
     }
   }
 
+  function formatTime(time){  
+    const militaryTime = new Date(`1970-01-01T${time}`);
+    const hours = militaryTime.getHours();
+    const minutes = militaryTime.getMinutes();
+
+    const period = hours >= 12 ? 'pm' : 'am';
+    const formattedHours = hours % 12 || 12;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedTime = `${formattedHours}:${formattedMinutes} ${period}`;
+    return formattedTime;
+  };
+
+
+
   return (
     <div className='wrapper'>
         <HeadNav title="Trucks" />
@@ -69,17 +63,20 @@ function TrucksPage() {
         <div className='content'>
             {trucks.map((truck) => (
               <div className='trucks' onClick={()=>showTruck(truck.id, truck.company, truck.location, truck.date, truck.time, truck.status)}>
-                <i className= {truck.status == 'Return' ? "bi bi-circle-fill returnBullet":"bi bi-circle-fill shippingBullet"}></i>
-                <div>
-                    <p id="company"> {truck.company} </p>
-                    <p id="jobsite"> {truck.location} </p>
-                    <p id="time"> {truck.time} </p>
-                </div>
-                <div>
+                   <div>
                     <p className='date-day'> {truck.date.split('-')[2]}</p>
                     <p className='date-month'> {getMonthName(truck.date.split('-')[1])}</p>
                     <p className='date-year'> {truck.date.split('-')[0]}</p>
                 </div>
+                <div>
+                    <p id="company"> {truck.company} </p>
+                    <p id="jobsite"> {truck.location} </p>
+                    <div className='timeAndStatus'>
+                      <p id={truck.status == 'Return' ? "return":"shipping"}> {truck.status == 'Return' ? "Return":"Shipping"} </p>
+                      <p id="time"> <i className="bi bi-clock"></i> {formatTime(truck.time)} </p>
+                    </div>
+                </div>
+                <p><i className="bi bi-chevron-compact-right"></i></p>
               </div>
             ))}        
         </div>

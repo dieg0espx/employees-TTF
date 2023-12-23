@@ -93,7 +93,11 @@
   color: lightgrey;
   font-weight: bold;
 }
-.wrapper-navbar button:hover {
+/* .wrapper-navbar button:hover {
+  color: #65D1B5;
+} */
+
+.wrapper-navbar .selected {
   color: #65D1B5;
 }
 .navIcon {
@@ -1868,7 +1872,7 @@ h5 {
   width: 100%;
   /* height: 80px; */
   display: grid;
-  grid-template-columns: 30px auto 90px;
+  grid-template-columns: 80px auto 20px;
   align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1876,7 +1880,8 @@ h5 {
   border-radius: 5px;
   border: 1px solid transparent;
   background-color: #282c34;
-  transition: 0.3s;color: lightgray;
+  transition: 0.3s;
+  color: lightgray;
 }
 .trucks #company{
   text-align: left;
@@ -1891,6 +1896,7 @@ h5 {
 .trucks .date-day {
   font-size: 25px;
   text-align: center;
+
 }
 .trucks .date-month {
   font-size: 10px;
@@ -1902,21 +1908,57 @@ h5 {
   font-size: 10px;
   text-align: center;
 }
+.trucks .timeAndStatus {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 3px;
+}
+.trucks #return {
+  height: 18px;
+  width: 70px;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: coral;
+  color: white;
+}
+.trucks #shipping {
+  height: 18px;
+  width: 70px;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: #65D1B5;
+  color: #0e1013
+}
+
 .trucks:hover {
   border: 1px solid #65D1B5;
-  padding-left: 20px;
+  /* padding-left: 10px; */
 }
+
 .trucks .shippingBullet {
-  font-size: 10px;
+  font-size: 20px;
   margin-right: 5px;
   color: #65D1B5;
 }
 .trucks .returnBullet {
-  font-size: 10px;
+  font-size: 20px;
   margin-right: 5px;
   color: coral;
 }
 
+.imgFrame {
+  border: none;
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;  
+  margin-bottom: 10px;
+}
 
 
 
