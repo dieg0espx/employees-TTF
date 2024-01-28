@@ -56,6 +56,8 @@
   padding-top: 20px;
   padding-bottom: 20px;
   color: white;
+  text-transform: capitalize;
+  margin-left: -8px;
 }
 
 .wrapper-headNav h2 {
@@ -2015,3 +2017,103 @@ h5 {
 #singBack {
   background-color: white;
 }
+
+
+
+/* ======== NEW-TRUCK PAGE ======= */
+.wrapper-newTruck {
+  background-color: #202124;
+  padding: 0 15px 100px 15px;
+  height: 100%;
+  min-height: 100vh; 
+}
+.wrapper-newTruck .label {
+  text-align: left;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  color: gray;
+}
+.wrapper-newTruck .searchBar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.wrapper-newTruck .iconSearch {
+  color: #65D1B5;
+  font-size: 20px;
+  position: relative;
+  left: -35px;
+  top: -5px;
+}
+.wrapper-newTruck input{
+  display: block;
+  min-width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: #282c34;
+  margin-bottom: 10px;
+  color: lightgray;
+  text-transform: capitalize;
+  outline: none;
+}
+.wrapper-newTruck .row {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.chooseJobsite {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 998;
+  background-color: red;
+}
+
+.wrapper-selectJobsite {
+  background-color: #202124;
+  padding: 0 15px 100px 15px;
+  height: 100%;
+  min-height: 100vh; 
+}
+.wrapper-selectJobsite .row {
+  text-align: left;
+}
+.wrapper-selectJobsite .label {
+  text-align: left;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  color: gray;
+}
+.wrapper-selectJobsite .searchBar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.wrapper-selectJobsite .iconSearch {
+  color: #65D1B5;
+  font-size: 20px;
+  position: relative;
+  left: -35px;
+  top: -5px;
+}
+.wrapper-selectJobsite input{
+  display: block;
+  min-width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: #282c34;
+  margin-bottom: 10px;
+  color: lightgray;
+  text-transform: capitalize;
+  outline: none;
+}
+
+

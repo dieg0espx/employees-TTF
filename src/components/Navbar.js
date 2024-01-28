@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-function Navbar() {
-
+function Navbar(props) {
   const [currentPage, setCurrentPage] = useState()
 
   useEffect(()=>{
-    const storedPage = localStorage.getItem('currentPage')
-    if(storedPage){
-      setCurrentPage(storedPage)
-    }
+    setCurrentPage(props.page)
   },[])
 
   function changePage(page){
-    localStorage.setItem('currentPage', page)
-    setCurrentPage(page)
     window.location.href= '/#/' + page
   }
 

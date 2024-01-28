@@ -8,6 +8,7 @@ import Sample from './pages/Sample';
 import Order from './pages/Order';
 import OrdersPage from './pages/OrdersPage';
 import NewTruck from './pages/NewTruck';
+import SelectJobsite from './pages/SelectJobsite'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path='/trucks' element={<TrucksPage />} />
             <Route path='/truck' element={<Truck />} />
             <Route path='/newTruck' element={<NewTruck />} />
+            <Route path='/selectjobsite/:company' element={<SelectJobsite />} />
             {/* <Route path='/sample' element={<Sample />} /> */}
           </Route>
         </Routes>

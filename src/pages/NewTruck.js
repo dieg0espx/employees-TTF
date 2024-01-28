@@ -1,43 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import HeadNav from '../components/HeadNav'
-import Navbar from '../components/Navbar'
-
+import React, { useEffect, useState } from 'react';
+import HeadNav from '../components/HeadNav';
+import Navbar from '../components/Navbar';
 
 function NewTruck() {
-    const [jobsites, setJobsites] = useState([])
-    const [findingCompany, setFindingCompany] = useState('')
+  const [companies, setCompanies] = useState([]);
+  const [findingCompany, setFindingCompany] = useState('');
 
-    const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
+  const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
 
-    async function getJobsites(){
-        await fetch(apiURL + '/getJobsites.php')
-        .then(response => response.json())
-        .then(response => setJobsites(response))
-    }
+  async function getCompanies() {
+      await fetch(apiURL + '/getCompanies.php')
+      .then(response => response.json())
+      .then(response => setCompanies(response))
+  }
 
-
-    useEffect(()=>{
-        getJobsites()
-    },[])
+  useEffect(() => {
+    getCompanies();
+  }, []);
 
 
   return (
-
-    <div className='wrapper'>
-        <HeadNav title="New Truck"/>
-        <Navbar />
-        <div className='content'>
-        <input type='text' placeholder='Search a company'onChange={(e)=>setFindingCompany(e.target.value)}/>
-        {jobsites.map((jobsite) => (
-            jobsite.companyName.includes(findingCompany) && (
-                <p key={jobsite.id}>{jobsite.companyName}</p>
-            )
+    <div className='wrapper-newTruck'>
+      <HeadNav title="New Truck" />
+      <Navbar page="trucks" />
+      <div className='content'>
+        <p className='label'> Choose a company:</p>
+        <div className='searchBar'>
+            <input type='text' placeholder='Search by Company' onChange={(e) => setFindingCompany(e.target.value)}/>
+            <i className="bi bi-search iconSearch"></i>
+        </div> 
+        {companies
+          .filter(company => company.startsWith(findingCompany))
+          .map((companyName) => (
+            <div className='row' key={companyName} onClick={() => window.location.href=`#/selectjobsite/${companyName.toUpperCase()}`}>
+              <p>{companyName}</p>
+              <i className="bi bi-chevron-compact-right iconChev"></i>
+            </div>
         ))}
-        </div>
-        
+      </div>
     </div>
-  )
+  );
 }
 
-export default NewTruck
-    
+export default NewTruck;

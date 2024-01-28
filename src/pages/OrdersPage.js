@@ -93,7 +93,7 @@ function OrdersPage() {
   return (
     <div className='wrapper'>
         <HeadNav title="Orders"/>
-        <Navbar />
+        <Navbar page="orders" />
         <div className='content'>
             <div className='selector3'>
                 <p className={group==1? "selected":""} id="left" onClick={()=>changeGroup(1)}> For Today </p>

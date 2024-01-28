@@ -64,7 +64,7 @@ function Order() {
 
   return (
     <div className='wrapper'>
-        <Navbar />
+        <Navbar page="orders"/>
         <div className='content'>
         {order.map((elements) => (   
                 <div key={elements}> 
