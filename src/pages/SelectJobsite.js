@@ -11,7 +11,7 @@ function SelectJobsite() {
   const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
 
   async function getJobsites() {
-      await fetch(apiURL + '/getJobsite.php?company=' + company)
+      await fetch(apiURL + '/getJobsitesPerCompany.php?company=' + company)
       .then(response => response.json())
       .then(response => setJobsites(response))
   }
@@ -32,12 +32,11 @@ function SelectJobsite() {
         {jobsites
           .filter(jobsite => jobsite.jobsite.startsWith(findingJobsite))
           .map((jobsite) => (
-            <div className='row' key={jobsite} >
+            <div className='row' key={jobsite} onClick={()=> window.location.href = "/#/submitTruck/" + jobsite.id}>
               <p>{jobsite.jobsite}</p>
               <i className="bi bi-chevron-compact-right iconChev"></i>
             </div>
         ))}
-
     </div>
   )
 }
