@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import HeadNav from '../components/HeadNav';
 import Navbar from '../components/Navbar';
+import Axios from 'axios'
 
-function SubmitTruck() {
-    const [status, setStatus] = useState(1)
+function SubmitTruck() {    
     const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
-
     const { id } = useParams();
+    const [status, setStatus] = useState(1)
     const [jobsite, setJobsite] = useState([])
+    const [image1, setImage1] = useState()
+    const [image2, setImage2] = useState()
+    const [image3, setImage3] = useState()
+    const [image4, setImage4] = useState()
+    const [image5, setImage5] = useState()
+    const [image6, setImage6] = useState()
     const [truck, setTruck] = useState({company:'', theLocation:'', theStatus:'shipping',theDate:getCurrentDate(), theTime:getCurrentTime(), image1:'',image2:'',image3:'',image4:'',image5:'',image6:''})
 
     async function getJobsite() {
@@ -45,17 +51,19 @@ function SubmitTruck() {
     useEffect(()=>{
         console.log(truck);
     },[truck])
-
-    const handleFileUpload = (event, imageNumber) => {
-        const file = event.target.files[0];
-        if (file) {
-          // Update the truck state based on the image number
-          setTruck((prevTruck) => ({
+    useEffect(()=>{
+        setTruck((prevTruck) => ({
             ...prevTruck,
-            [`image${imageNumber}`]: URL.createObjectURL(file),
-          }));
-        }
-    };
+            image1: image1,
+            image2: image2,
+            image3: image3,
+            image4: image4,
+            image5: image5,
+            image6: image6
+        }));
+    },[image1, image2, image3, image4, image5, image6])
+
+
     const handleStatusChange = (newStatus) => {
         setStatus(newStatus);
         setTruck((prevTruck) => ({ ...prevTruck, theStatus: newStatus }));
@@ -69,9 +77,70 @@ function SubmitTruck() {
         const newTime = event.target.value;
         setTruck((prevTruck) => ({ ...prevTruck, theTime: newTime }));
     };
+    async function submitNewTruck(){
+        await submitImage1()
+        await submitImage2()
+        await submitImage3()
+        await submitImage4()
+        await submitImage5()
+        await submitImage6()
+
+        console.log("SUBMITTING NEW TRUCK ....");
+        const jsonString = JSON.stringify(truck);
+        fetch( apiURL + '/newTruck.php?data=' + jsonString)
+        .then(response => response.json())
+        .then(response => console.log(response))
+    }
 
 
-   
+
+    async function submitImage1(){
+        const formData = new FormData()
+        formData.append('file', image1)
+        formData.append("upload_preset", "ni1ax9oj")
+        await Axios.post("https://api.cloudinary.com/v1_1/dvord9edi/image/upload", formData)
+        .then((response) => setImage1(response.data.url))
+    }
+    async function submitImage2(){
+        const formData = new FormData()
+        formData.append('file', image2)
+        formData.append("upload_preset", "ni1ax9oj")
+        await Axios.post("https://api.cloudinary.com/v1_1/dvord9edi/image/upload", formData)
+        .then((response) => setImage2(response.data.url))
+    }
+    async function submitImage3(){
+        const formData = new FormData()
+        formData.append('file', image3)
+        formData.append("upload_preset", "ni1ax9oj")
+        await Axios.post("https://api.cloudinary.com/v1_1/dvord9edi/image/upload", formData)
+        .then((response) => setImage3(response.data.url))
+    }
+    async function submitImage4(){
+        const formData = new FormData()
+        formData.append('file', image4)
+        formData.append("upload_preset", "ni1ax9oj")
+        await Axios.post("https://api.cloudinary.com/v1_1/dvord9edi/image/upload", formData)
+        .then((response) => setImage4(response.data.url))
+    }
+    async function submitImage5(){
+        const formData = new FormData()
+        formData.append('file', image5)
+        formData.append("upload_preset", "ni1ax9oj")
+        await Axios.post("https://api.cloudinary.com/v1_1/dvord9edi/image/upload", formData)
+        .then((response) => setImage5(response.data.url))
+    }
+    async function submitImage6(){
+        const formData = new FormData()
+        formData.append('file', image6)
+        formData.append("upload_preset", "ni1ax9oj")
+        await Axios.post("https://api.cloudinary.com/v1_1/dvord9edi/image/upload", formData)
+        .then((response) => setImage6(response.data.url))
+    }
+
+
+
+
+    
 
   return (
     <div className='wrapper-submitJobsite'>
@@ -80,7 +149,7 @@ function SubmitTruck() {
         <h3> {jobsite.jobsite} </h3>
         <div className='selector2'>
             <p className={status==1? "selected":""} id="left"  onClick={()=>handleStatusChange('shipping')}> Shipping </p>
-            <p className={status==2? "selected":""} id="right" onClick={()=>handleStatusChange('return')}> Return </p>
+            <p className={status==2? "selected":""} id="right" onClick={()=>handleStatusChange('Return')}> Return </p>
         </div>
         <div className='dateTimes'>
             <div className='date-time' id="top"> 
@@ -93,30 +162,31 @@ function SubmitTruck() {
             </div>   
         </div>
         <div className='file-container'>
-        <i className='bi bi-camera iconCamera'></i>
-        <input type='file' onChange={(e) => handleFileUpload(e, 1)} />
-      </div>
-      <div className='file-container'>
-        <i className='bi bi-camera iconCamera'></i>
-        <input type='file' onChange={(e) => handleFileUpload(e, 2)} />
-      </div>
-      <div className='file-container'>
-        <i className='bi bi-camera iconCamera'></i>
-        <input type='file' onChange={(e) => handleFileUpload(e, 3)} />
-      </div>
-      <div className='file-container'>
-        <i className='bi bi-camera iconCamera'></i>
-        <input type='file' onChange={(e) => handleFileUpload(e, 4)} />
-      </div>
-      <div className='file-container'>
-        <i className='bi bi-camera iconCamera'></i>
-        <input type='file' onChange={(e) => handleFileUpload(e, 5)} />
-      </div>
-      <div className='file-container'>
-        <i className='bi bi-camera iconCamera'></i>
-        <input type='file' onChange={(e) => handleFileUpload(e, 6)} />
-      </div>
-        <button className='btn-submit'> Submit </button>
+            <i className='bi bi-camera iconCamera'></i>
+            <input type='file' onChange={(e) => setImage1(e.target.files[0])} />
+        </div>
+        <div className='file-container'>
+            <i className='bi bi-camera iconCamera'></i>
+            <input type='file' onChange={(e) => setImage2(e.target.files[0])} />
+        </div>
+        <div className='file-container'>
+            <i className='bi bi-camera iconCamera'></i>
+            <input type='file' onChange={(e) => setImage3(e.target.files[0])} />
+        </div>
+        <div className='file-container'>
+            <i className='bi bi-camera iconCamera'></i>
+            <input type='file' onChange={(e) => setImage4(e.target.files[0])} />
+        </div>
+        <div className='file-container'>
+            <i className='bi bi-camera iconCamera'></i>
+            <input type='file' onChange={(e) => setImage5(e.target.files[0])} />
+        </div>
+        <div className='file-container'>
+            <i className='bi bi-camera iconCamera'></i>
+            <input type='file' onChange={(e) => setImage6(e.target.files[0])} />
+        </div>
+     
+        <button className='btn-submit' onClick={()=>submitNewTruck()}> Submit </button>
     </div>
   )
 }

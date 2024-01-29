@@ -58,12 +58,8 @@ function Order() {
         fetchData()
       }
 
-
-
-
-
   return (
-    <div className='wrapper'>
+    <div className='wrapper-order'>
         <Navbar page="orders"/>
         <div className='content'>
         {order.map((elements) => (   

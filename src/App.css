@@ -281,9 +281,6 @@
   padding-left: 20px;
 }
 
-
-
-
 .orders {
   color: lightgray;
 }
@@ -334,6 +331,16 @@
 }
 
 /* =========  ORDER  ==========  */
+.wrapper-order {
+  background-color: #202124;
+  padding: 0 15px 100px 15px;
+  height: 100%;
+  min-height: 100vh; 
+}
+.wrapper-order .row p {
+  text-align: right;
+}
+
 .row {
   width: 100%;
   display: flex;
@@ -358,8 +365,6 @@ h3 {
   margin-top: -20px;
   margin-bottom: 20px;
 }
-
-
 h5 {
   font-size: 15px;
   font-weight: 400;
