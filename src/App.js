@@ -10,6 +10,8 @@ import OrdersPage from './pages/OrdersPage';
 import NewTruck from './pages/NewTruck';
 import SelectJobsite from './pages/SelectJobsite'
 import SubmitTruck from './pages/SubmitTruck';
+import Forklifts from './pages/Forklifts';
+import SubmitForklift from './pages/SubmitForklift';
 
 
 function App() {
@@ -27,6 +29,9 @@ function App() {
             <Route path='/newTruck' element={<NewTruck />} />
             <Route path='/selectjobsite/:company' element={<SelectJobsite />} />
             <Route path='/submitTruck/:id' element={<SubmitTruck />} />
+            <Route path='/forklifts' element={<Forklifts />} />
+            <Route path='/submitForklift/' element={<SubmitForklift />} />
+
             {/* <Route path='/sample' element={<Sample />} /> */}
           </Route>
         </Routes>

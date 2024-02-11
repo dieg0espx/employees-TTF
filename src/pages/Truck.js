@@ -7,12 +7,6 @@ import { useParams, Link } from 'react-router-dom';
 
 function Truck() {
   const [truck, setTruck] = useState([])
-  const [iframe1, setIframe1] = useState(false)
-  const [iframe2, setIframe2] = useState(false)
-  const [iframe3, setIframe3] = useState(false)
-  const [iframe4, setIframe4] = useState(false)
-  const [iframe5, setIframe5] = useState(false)
-  const [iframe6, setIframe6] = useState(false)
   const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
 
   const location = useLocation();
