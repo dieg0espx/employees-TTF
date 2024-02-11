@@ -11,7 +11,7 @@ function TrucksPage() {
   },[])
 
   function getTrucks() {
-      fetch( apiURL + '/getTrucks.php')
+      fetch( apiURL + '/readTrucks.php')
       .then(response => response.json())
       .then(response => {
           const sortedTrucks = response.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -57,18 +57,18 @@ function TrucksPage() {
         <Navbar page="trucks"/>
         <div className='content'>
             {trucks.map((truck) => (
-              <div className='trucks' onClick={()=>showTruck(truck.id, truck.company, truck.location, truck.date, truck.time, truck.status)}>
+              <div className='trucks' onClick={()=>showTruck(truck.id, truck.company, truck.theLocation, truck.theDate, truck.theTime, truck.the)}>
                    <div>
-                    <p className='date-day'> {truck.date.split('-')[2]}</p>
-                    <p className='date-month'> {getMonthName(truck.date.split('-')[1])}</p>
-                    <p className='date-year'> {truck.date.split('-')[0]}</p>
+                    <p className='date-day'> {truck.theDate.split('-')[2]}</p>
+                    <p className='date-month'> {getMonthName(truck.theDate.split('-')[1])}</p>
+                    <p className='date-year'> {truck.theDate.split('-')[0]}</p>
                 </div>
                 <div>
                     <p id="company"> {truck.company} </p>
-                    <p id="jobsite"> {truck.location} </p>
+                    <p id="jobsite"> {truck.theLocation} </p>
                     <div className='timeAndStatus'>
-                      <p id={truck.status == 'Return' ? "return":"shipping"}> {truck.status == 'Return' ? "Return":"Shipping"} </p>
-                      <p id="time"> <i className="bi bi-clock"></i> {formatTime(truck.time)} </p>
+                      <p id={truck.theStatus == 'Return' ? "return":"shipping"}> {truck.theStatus == 'Return' ? "Return":"Shipping"} </p>
+                      <p id="time"> <i className="bi bi-clock"></i> {formatTime(truck.theTime)} </p>
                     </div>
                 </div>
                 <p><i className="bi bi-chevron-compact-right"></i></p>

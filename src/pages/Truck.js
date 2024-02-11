@@ -20,7 +20,7 @@ function Truck() {
   const id = searchParams.get('id');
 
   function getTrucks() {
-    fetch( apiURL + '/getTruck.php' + '?id=' + id)
+    fetch( apiURL + '/readTruckByID.php' + '?id=' + id)
     .then(response => response.json())
     .then(response => {setTruck(response[0])})
   }
@@ -64,14 +64,14 @@ function Truck() {
         <Navbar page="trucks"/>
         <div className='content'>
             <HeadNav title={truck.company} />
-            <h3> {truck.location} </h3>
-            <h3> {formatDate(truck.date)} | {formatTime(truck.time)}</h3>
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage1.php?id=' + id} onLoad={()=>setIframe1(true)} />
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage2.php?id=' + id} onLoad={()=>setIframe2(true)} />
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage3.php?id=' + id} onLoad={()=>setIframe3(true)} />
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage4.php?id=' + id} onLoad={()=>setIframe4(true)} />
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage5.php?id=' + id} onLoad={()=>setIframe5(true)} />
-            <iframe className="imgFrame" src={'http://api.ttfconstruction.com/getImage6.php?id=' + id} onLoad={()=>setIframe6(true)} /> 
+            <h3> {truck.theLocation} </h3>
+            <h3> {formatDate(truck.theDate)} | {formatTime(truck.theTime)}</h3>
+            <img className="truckImg" src={truck.image1} style={{display: truck.image1 !== ''? "block":"none"}}/>
+            <img className="truckImg" src={truck.image2} style={{display: truck.image2 !== ''? "block":"none"}}/>
+            <img className="truckImg" src={truck.image3} style={{display: truck.image3 !== ''? "block":"none"}}/>
+            <img className="truckImg" src={truck.image4} style={{display: truck.image4 !== ''? "block":"none"}}/>
+            <img className="truckImg" src={truck.image5} style={{display: truck.image5 !== ''? "block":"none"}}/>
+            <img className="truckImg" src={truck.image6} style={{display: truck.image6 !== ''? "block":"none"}}/>
         </div> 
     </div>
   )
