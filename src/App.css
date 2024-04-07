@@ -991,7 +991,7 @@ h5 {
 .hours {
   height: calc((100vh - 370px));
   overflow-y: scroll;
-  margin-bottom: -30px;
+  margin-bottom: -50px;
 }
 
 .hours .row {
@@ -1005,4 +1005,72 @@ h5 {
 } 
 .hours .row:hover {
   padding: 10px;
+}
+
+.popup-password {
+  background-color: #202124;
+  width: 90vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.popup-password h2 {
+  color: white;
+  font-size: 30px;
+}
+.popup-password .form {
+  display: block;
+  /* border: 1px solid red; */
+  margin-top: 20px;
+}
+
+.popup-password .form input {
+  display: block;
+  width: 100%;
+  font-size: 17px;
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #282c34;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  outline: none;
+  color: lightgray;
+}
+.popup-password .form button {
+  display: block;
+  width: 80%;
+  height: 40px;
+  font-size: 20px;
+  margin: 30px auto 5px auto;  
+  border: none;
+  border-radius: 5px;
+  background-color: #65D1B5;
+
+
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.profile #password {
+  border: none;
+  text-align: right;
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  padding: 0;
+  letter-spacing: 5px;
+  outline: none;
 }
