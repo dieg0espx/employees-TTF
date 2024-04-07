@@ -101,7 +101,7 @@
   height: 75px;
   background-color: #282c34;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }  
 
@@ -876,7 +876,7 @@ h5 {
 .forklifts .iconContainer {
   width: 33px;
   height: 33px;
-  background-color: salmon;
+  /* background-color: salmon; */
   padding: 4px;
   border-radius: 5px;
   margin-left: 0;
@@ -964,6 +964,7 @@ h5 {
   outline: none;
   color: white;
   border: none;
+  resize: none;
 }
 
 #new-forklift #label {
@@ -983,4 +984,25 @@ h5 {
   font-size: 16px;
   font-weight: 600;
   color: #282c34;
+}
+
+
+/* =========  HOURS PAGE  =========  */
+.hours {
+  height: calc((100vh - 370px));
+  overflow-y: scroll;
+  margin-bottom: -30px;
+}
+
+.hours .row {
+  display: grid;
+  grid-template-columns: 110px auto auto 35px 35px;
+  text-align: center;
+}
+
+.hours .row #date {
+  text-align: left;
+} 
+.hours .row:hover {
+  padding: 10px;
 }

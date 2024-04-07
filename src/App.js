@@ -12,7 +12,8 @@ import SelectJobsite from './pages/SelectJobsite'
 import SubmitTruck from './pages/SubmitTruck';
 import Forklifts from './pages/Forklifts';
 import SubmitForklift from './pages/SubmitForklift';
-
+import Hours from './pages/Hours';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route element={<ProtectedRoutes />}>
-            <Route path='/' element={<OrdersPage />} />
+            <Route path='/' element={<OrdersPage />} />ß
             <Route path='/orders' element={<OrdersPage />} />
             <Route path='/order' element={<Order />} />
             <Route path='/trucks' element={<TrucksPage />} />
@@ -31,8 +32,8 @@ function App() {
             <Route path='/submitTruck/:id' element={<SubmitTruck />} />
             <Route path='/forklifts' element={<Forklifts />} />
             <Route path='/submitForklift/' element={<SubmitForklift />} />
-
-            {/* <Route path='/sample' element={<Sample />} /> */}
+            <Route path='/hours' element={<Hours/>} />
+            <Route path='/profile' element={<Profile/>} />
           </Route>
         </Routes>
       </div>

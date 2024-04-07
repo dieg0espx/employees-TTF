@@ -26,6 +26,7 @@ useEffect(()=>{
         .then(response => {
             if(response.status == 200){
                 Cookies.set('access', true, { expires: 480 / 1440 });
+                Cookies.set('code', response.code, { expires: 480 / 1440 });
                 if(remmember){
                     Cookies.set('username', username)
                 } else {

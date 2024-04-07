@@ -83,8 +83,9 @@ function Forklifts() {
                   <div className='forklifts'>
                     {forklifts.map((row, key) => (
                       <div key={key} className='row-forklift' onClick={() => setSelectedForklift(key)}>
-                        <div className='iconContainer' style={{background:row.forklift == 'No.1 (Green)'?'#65D1B5':'salmon'}}>
-                            <ForkliftIcon  fillColor={row.forklift == 'No.1 (Green)'?'#282c34':'#282c34'} className='iconForklift'/>
+                        {/* <div className='iconContainer' style={{background:row.forklift == 'No.1 (Green)'?'#65D1B5':'salmon'}}> */}
+                        <div className='iconContainer'>
+                            <ForkliftIcon  fillColor={row.forklift == 'No.1 (Green)'?'#65D1B5':'salmon'} className='iconForklift'/>
                         </div>                        
                         <div className='name-container'>
                             <p id="name"> {row.name} </p>
