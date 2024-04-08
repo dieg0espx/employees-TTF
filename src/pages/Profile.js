@@ -61,8 +61,8 @@ function Profile() {
 
   return (
     <div className='wrapper'>
-        <HeadNav title="My Account" />
-        <Navbar />
+        <HeadNav title="Profile" />
+        <Navbar page="profile"/>
         <div className='content'>
             <div className='profile'>
                 <div className='row'>
