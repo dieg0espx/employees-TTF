@@ -1,5 +1,6 @@
 {
   "name": "employee-app",
+  "homepage": "ttfconstruction.com/employeeApp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
