@@ -117,7 +117,7 @@ function OrdersPage() {
                           </div>
                           <div id="right" style={{display: isMobile && isEditing ? "none":"block"}}>
                             <p className='includeDrawings' style={{display: order.drawings == 'true' && !isMobile? "block":"none"}}>Include Drawings</p>
-                            <p className='date-day'> {order.date.split('-')[2]}</p>
+                            <p className='date-day'> {order.date.split('-')[2]-1}</p>
                             <p className='date-month'> {getMonthName(order.date.split('-')[1])}</p>
                             <p className='date-year'> {order.date.split('-')[0]}</p>
                           </div>
@@ -141,7 +141,7 @@ function OrdersPage() {
                           </div>
                           <div id="right" style={{display: isMobile && isEditing ? "none":"block"}}>
                             <p className='includeDrawings' style={{display: order.drawings == 'true' && !isMobile? "block":"none"}}>Include Drawings</p>
-                            <p className='date-day'> {order.date.split('-')[2]}</p>
+                            <p className='date-day'> {order.date.split('-')[2]-1}</p>
                             <p className='date-month'> {getMonthName(order.date.split('-')[1])}</p>
                             <p className='date-year'> {order.date.split('-')[0]}</p>
                           </div>
@@ -165,7 +165,7 @@ function OrdersPage() {
                           </div>
                           <div id="right" style={{display: isMobile && isEditing ? "none":"block"}}>
                           <p className='includeDrawings' style={{display: order.drawings == 'true' && !isMobile? "block":"none"}}>Include Drawings</p>
-                          <p className='date-day'> {order.date.split('-')[2]}</p>
+                          <p className='date-day'> {order.date.split('-')[2]-1}</p>
                           <p className='date-month'> {getMonthName(order.date.split('-')[1])}</p>
                           <p className='date-year'> {order.date.split('-')[0]}</p>
                           </div>

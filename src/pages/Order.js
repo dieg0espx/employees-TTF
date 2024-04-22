@@ -8,6 +8,8 @@ import SignatureCanvas from 'react-signature-canvas';
 
 function Order() {
     const [order, setOrder] = useState([])    
+    const [signTenant1, setSignTenant1] = useState(null)
+    const [currentTenantSign1, setCurrentSignTenant] = useState()
     const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
     
     useEffect(()=>{
@@ -36,9 +38,16 @@ function Order() {
         updateOrderDone()
       } 
     };
+  
+    function formmatDate(dateString){
+      const date = new Date(dateString);
+      // Subtract one day (in milliseconds)
+      const oneDayBefore = new Date(date.getTime() - (24 * 60 * 60 * 1000));
+      // Format the date to 'yyyy-mm-dd' format
+      const formattedDate = oneDayBefore.toISOString().split('T')[0];
+      return formattedDate;
+    }
 
-      const [signTenant1, setSignTenant1] = useState(null)
-      const [currentTenantSign1, setCurrentSignTenant] = useState()
 
 
       //  ==== SIGNATURES ====  // 
@@ -85,7 +94,7 @@ function Order() {
                     </div>
                     <div className='row'>
                       <h4> Date: </h4>
-                      <p> {elements.date}</p>
+                      <p> {formmatDate(elements.date)}</p>
                     </div>
 
                     <div style={{display: elements.af6x4 + elements.af5x4 +elements.af4x4 + elements.sf6x4 +elements.sf5x4 +elements.sf4x4 + elements.sf3x4 < 1 ? "none":"block" }}>
