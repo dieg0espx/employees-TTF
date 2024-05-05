@@ -66,7 +66,7 @@ function NewJosbite() {
         setContact('')
         setTel('')
         
-        window.location.reload();
+        window.location.href= '#/trucks';
     }
 
   return (
