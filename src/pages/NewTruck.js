@@ -21,7 +21,7 @@ function NewTruck() {
 
   return (
     <div className='wrapper-newTruck'>
-      <HeadNav title="New Truck" />
+      <HeadNav title="Select Company" action="plus" newLocation="#/newJobsite"/>
       <Navbar page="trucks" />
       <div className='content'>
         <p className='label'> Choose a company:</p>

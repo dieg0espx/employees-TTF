@@ -14,6 +14,7 @@ import Forklifts from './pages/Forklifts';
 import SubmitForklift from './pages/SubmitForklift';
 import Hours from './pages/Hours';
 import Profile from './pages/Profile';
+import NewJobsite from './pages/NewJosbite'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path='/submitForklift/' element={<SubmitForklift />} />
             <Route path='/hours' element={<Hours/>} />
             <Route path='/profile' element={<Profile/>} />
+            <Route path='/newJobsite' element={<NewJobsite/>} />
           </Route>
         </Routes>
       </div>
