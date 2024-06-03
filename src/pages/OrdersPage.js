@@ -48,7 +48,9 @@ function OrdersPage() {
       fetch(apiURL + '/getOrders.php')
         .then(response => response.json())
         .then(response => {
-          const today = new Date();
+    
+          const today = new Date() 
+          today.setDate(today.getDate() - 1);
           const tomorrow = new Date(today);
           tomorrow.setDate(tomorrow.getDate() + 1);
           tomorrow.setHours(0, 0, 0, 0); // Set to the beginning of tomorrow
@@ -90,6 +92,27 @@ function OrdersPage() {
       setGroup(page)
     }
 
+    function formatDate(dateString) {
+      const currentDate = new Date(dateString);
+      // Subtract one day from the current date
+      currentDate.setDate(currentDate.getDate() - 1);
+    
+      const year = currentDate.getFullYear();
+      let month = currentDate.getMonth() + 1;
+      let day = currentDate.getDate();
+    
+      // Add leading zero if month/day is single digit
+      if (month < 10) {
+        month = '0' + month;
+      }
+      if (day < 10) {
+        day = '0' + day;
+      }
+    
+      const formattedDate = year + '-' + month + '-' + day;
+      return formattedDate;
+    }
+
   return (
     <div className='wrapper'>
         <HeadNav title="Orders"/>
@@ -117,7 +140,7 @@ function OrdersPage() {
                           </div>
                           <div id="right" style={{display: isMobile && isEditing ? "none":"block"}}>
                             <p className='includeDrawings' style={{display: order.drawings == 'true' && !isMobile? "block":"none"}}>Include Drawings</p>
-                            <p className='date-day'> {order.date.split('-')[2]-1}</p>
+                            <p className='date-day'> {order.date.split('-')[2]}</p>
                             <p className='date-month'> {getMonthName(order.date.split('-')[1])}</p>
                             <p className='date-year'> {order.date.split('-')[0]}</p>
                           </div>
@@ -141,7 +164,7 @@ function OrdersPage() {
                           </div>
                           <div id="right" style={{display: isMobile && isEditing ? "none":"block"}}>
                             <p className='includeDrawings' style={{display: order.drawings == 'true' && !isMobile? "block":"none"}}>Include Drawings</p>
-                            <p className='date-day'> {order.date.split('-')[2]-1}</p>
+                            <p className='date-day'> {order.date.split('-')[2]}</p>
                             <p className='date-month'> {getMonthName(order.date.split('-')[1])}</p>
                             <p className='date-year'> {order.date.split('-')[0]}</p>
                           </div>
@@ -165,7 +188,7 @@ function OrdersPage() {
                           </div>
                           <div id="right" style={{display: isMobile && isEditing ? "none":"block"}}>
                           <p className='includeDrawings' style={{display: order.drawings == 'true' && !isMobile? "block":"none"}}>Include Drawings</p>
-                          <p className='date-day'> {order.date.split('-')[2]-1}</p>
+                          <p className='date-day'> {order.date.split('-')[2]}</p>
                           <p className='date-month'> {getMonthName(order.date.split('-')[1])}</p>
                           <p className='date-year'> {order.date.split('-')[0]}</p>
                           </div>

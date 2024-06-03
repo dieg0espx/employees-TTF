@@ -3,13 +3,14 @@ import { useParams } from 'react-router-dom';
 import HeadNav from '../components/HeadNav'
 import Navbar from '../components/Navbar'
 import SignatureCanvas from 'react-signature-canvas';
-
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { app } from '../Firebase.js';
 
 
 function Order() {
+    const db = getFirestore(app);
     const [order, setOrder] = useState([])    
-    const [signTenant1, setSignTenant1] = useState(null)
-    const [currentTenantSign1, setCurrentSignTenant] = useState()
+    const sigCanvas = useRef(null);
     const apiURL = process.env.REACT_APP_PUBLIC_API_URL;
     
     useEffect(()=>{
@@ -32,6 +33,18 @@ function Order() {
         fetchData()
       };
 
+    async function updateOrderSignature(url){
+      await fetch(`${apiURL}/updateOrderSignature.php?id=${getID()}&sign=${url}`)
+      .then(response => response.json())
+      .then(response => {
+        if(response == true){
+          fetchData()
+        } else {
+          alert('Error - Connection SQL ')
+        }
+      })
+    };
+
     const showConfirmation = () => {
       const result = window.confirm('Mark as Completed?');
       if (result) {
@@ -40,32 +53,38 @@ function Order() {
     };
   
     function formmatDate(dateString){
-      const date = new Date(dateString);
-      // Subtract one day (in milliseconds)
-      const oneDayBefore = new Date(date.getTime() - (24 * 60 * 60 * 1000));
-      // Format the date to 'yyyy-mm-dd' format
-      const formattedDate = oneDayBefore.toISOString().split('T')[0];
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+    
+      const [year, month, day] = dateString.split('-');
+      const monthIndex = parseInt(month) - 1;
+      const formattedDate = `${months[monthIndex]} ${parseInt(day)}, ${year}`;
       return formattedDate;
     }
 
 
 
       //  ==== SIGNATURES ====  // 
-      function clearSign(signID){
-        switch (signID) {
-          case 1:
-            signTenant1.clear()
-            break;
-          default:
-            console.log("SIGNER NOT FOUND");
-            break;
+      async function storeSign(){
+        if (sigCanvas.current) {
+          try {
+            let signatureData = sigCanvas.current.toDataURL();
+            const docRef = await addDoc(collection(db, "orders"), {
+              sign: signatureData
+            });
+            console.log("Document written with ID: ", docRef.id);
+            await updateOrderSignature(docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
         }
       }
-      async function storeSign(){
-        await fetch(`${apiURL}/updateOrderSignature.php?id=` + getID() + '&&signature=' + signTenant1.getTrimmedCanvas().toDataURL('image/png').toString())
-        console.log("Sign Submitted");
-        fetchData()
-      }
+
+      const clearSign = () => {
+        sigCanvas.current.clear();
+      };
 
   return (
     <div className='wrapper-order'>
@@ -94,7 +113,7 @@ function Order() {
                     </div>
                     <div className='row'>
                       <h4> Date: </h4>
-                      <p> {formmatDate(elements.date)}</p>
+                      <p> {elements.date}</p>
                     </div>
 
                     <div style={{display: elements.af6x4 + elements.af5x4 +elements.af4x4 + elements.sf6x4 +elements.sf5x4 +elements.sf4x4 + elements.sf3x4 < 1 ? "none":"block" }}>
@@ -335,14 +354,16 @@ function Order() {
                     <div className='sign-pad' style={{display: elements.done == 1 && elements.signature == ''? "block":"none"}}>
                         <div className='pad'>
                         <SignatureCanvas 
-                            penColor="white" 
-                            canvasProps={{width: 340, height: 250, className: 'sigCanvas'}} 
-                            ref={c=>setSignTenant1(c)}
+                            penColor="#65D1B5"
+                            canvasProps={{width: 330, height: 300, className: 'sigCanvas',
+                            style: { border: '2px solid transparent'  } 
+                            }} 
+                            ref={sigCanvas}
                         ></SignatureCanvas>
                         </div>
                         <div className='actions'>
-                            <button id="save"   onClick={()=>storeSign(1)}> Save </button>
-                            <button id="cancel" onClick={()=>clearSign(1)}> Clear </button>
+                            <button id="save"   onClick={()=>storeSign()}> Save </button>
+                            <button id="cancel" onClick={()=>clearSign()}> Clear </button>
                         </div>
                     </div>
 

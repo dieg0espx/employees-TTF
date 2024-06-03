@@ -577,7 +577,9 @@ h5 {
   background-color: white;
 }
 
-
+.signCanvas {
+  border: 1px solid red;
+}
 
 /* ======== NEW-TRUCK PAGE ======= */
 .wrapper-newTruck {
